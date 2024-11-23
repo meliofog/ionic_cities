@@ -20,7 +20,22 @@
       <p><strong>Longitude:</strong> {{ city?.lng }}</p>
     </ion-card-content>
   </ion-card>
+  
+  <ion-card *ngIf="weather">
+    <ion-card-header>
+      <ion-card-title>Weather in {{ city?.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Temperature:</strong> {{ weather.main.temp }}°C</p>
+      <p><strong>Condition:</strong> {{ weather.weather[0]?.description }}</p>
+      <p><strong>Humidity:</strong> {{ weather.main.humidity }}%</p>
+      <p><strong>Wind Speed:</strong> {{ weather.wind.speed }} m/s</p>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-spinner *ngIf="isLoading"></ion-spinner>
+  <p *ngIf="errorMessage" class="ion-text-center">{{ errorMessage }}</p>
+  
   <ion-button *ngIf="city?.name" color="primary" (click)="bookAccommodation()" class="content-fit-button">
     <ion-icon slot="start" name="bed-outline"></ion-icon>
     Book
