@@ -40,4 +40,9 @@
     <ion-icon slot="start" name="bed-outline"></ion-icon>
     Book
   </ion-button>
+  <ion-button *ngIf="city?.id" color="success" (click)="showOnMap()" class="content-fit-button">
+    <ion-icon slot="start" name="location"></ion-icon>
+    Show on Map
+  </ion-button>
+  
 </ion-content>

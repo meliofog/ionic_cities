@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CityService, City } from '../services/city.service';
 import { WeatherService } from '../services/weather.service';
 
@@ -17,7 +17,8 @@ export class CityDetailsPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private cityService: CityService,
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -52,9 +53,23 @@ export class CityDetailsPage implements OnInit {
 
   bookAccommodation() {
     if (this.city && this.city.name) {
-      const cityName = encodeURIComponent(this.city.name); // Encode to handle spaces or special characters
+      const cityName = encodeURIComponent(this.city.name); 
       const url = `https://www.booking.com/searchresults.html?ss=${cityName}`;
-      window.open(url, '_blank'); // Open the URL in a new browser tab
+      window.open(url, '_blank'); 
+    }
+  }
+
+  showOnMap() {
+    if (this.city) {
+      const lat = this.city.lat;
+      const lng = this.city.lng;
+
+      this.router.navigate(['/tabs/tab3'], {
+        queryParams: {
+          lat: lat,
+          lng: lng
+        }
+      });
     }
   }
 }
