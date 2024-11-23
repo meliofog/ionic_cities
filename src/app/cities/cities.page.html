@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cities</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleView()">
+        <ion-icon [name]="isGridView ? 'list' : 'grid'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-content>
+    <ng-container *ngIf="!isGridView">
+      <ion-list>
+        <ion-item *ngFor="let city of cities" [routerLink]="['/city-details', city.id]">
+          <ion-thumbnail slot="start">
+            <img [src]="city.photo" />
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ city.name }}</h2>
+            <p>{{ city.province }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  
+    <ng-container *ngIf="isGridView">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" *ngFor="let city of cities">
+            <ion-card [routerLink]="['/city-details', city.id]">
+              <img [src]="city.photo" />
+              <ion-card-header>
+                <ion-card-title>{{ city.name }}</ion-card-title>
+                <ion-card-subtitle>{{ city.province }}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+  </ion-content>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/cities"></ion-back-button>
+      </ion-buttons>
+      <ion-title>City Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-img [src]="city?.photo"></ion-img>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ city?.name }}</ion-card-title>
+      <ion-card-subtitle>{{ city?.province }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Latitude:</strong> {{ city?.lat }}</p>
+      <p><strong>Longitude:</strong> {{ city?.lng }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button *ngIf="city?.name" color="primary" (click)="bookAccommodation()" class="content-fit-button">
+    <ion-icon slot="start" name="bed-outline"></ion-icon>
+    Book
+  </ion-button>
+</ion-content>
